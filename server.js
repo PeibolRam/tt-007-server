@@ -9,7 +9,7 @@ const { auth } = require('./middleware/auth')
 
 require('dotenv').config();
 
-mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }, (err) => {
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false }, (err) => {
     if(err) return err
     console.log("Conectado a MongoDB")
 })
