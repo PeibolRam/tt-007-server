@@ -19,8 +19,15 @@ app.use(express.json())
 app.use(cookieParser())
 
 
+app.get('/', auth, (req, res) => {
+    res.status(200).json({
+        message: 'FUNCIONA'
+    })
+})
+
+
 //Rutas user
-app.post('/api/users/register', (req, res) => {
+app.post('/users/register', (req, res) => {
     const user = new User(req.body)
     user.save((err, doc) => {
         if(err) return res.json({success: false, err})
@@ -31,7 +38,7 @@ app.post('/api/users/register', (req, res) => {
     })
 })
 
-app.post('/api/users/login', (req, res) => {
+app.post('/users/login', (req, res) => {
     User.findOne({'email': req.body.email}, (err,user) => {
         if(!user) return res.json({loginSuccess: false, message: 'Auth fallida, email no encontrado'})
 
@@ -48,17 +55,18 @@ app.post('/api/users/login', (req, res) => {
     })
 })
 
-app.get('/api/users/auth', auth, (req, res) => {
+app.get('/users/auth', auth, (req, res) => {
     res.status(200).json({
         isAuth: true,
         email: req.user.email,
         name: req.user.name,
         lastname: req.user.lastname,
-        role: req.user.role
+        role: req.user.role,
+        token: req.user.token
     })
 })
 
-app.get('/api/user/logout', auth, (req, res) => {
+app.get('/user/logout', auth, (req, res) => {
     User.findOneAndUpdate(
         {_id: req.user._id},
         {token: ''},
