@@ -1,13 +1,15 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
-
+const cors = require('cors')
 const app = express()
 
 const  { User } = require('./models/user')
 const { auth } = require('./middleware/auth')
 
 require('dotenv').config();
+
+
 
 mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false }, (err) => {
     if(err) return err
@@ -17,7 +19,7 @@ mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useCreateIndex: 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cookieParser())
-
+app.use(cors())
 
 app.get('/', auth, (req, res) => {
     res.send('TT20-2-007');
