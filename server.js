@@ -20,9 +20,7 @@ app.use(cookieParser())
 
 
 app.get('/', auth, (req, res) => {
-    res.status(200).json({
-        message: 'FUNCIONA'
-    })
+    res.send('TT20-2-007');
 })
 
 
