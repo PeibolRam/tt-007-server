@@ -5,6 +5,7 @@ const cors = require('cors')
 const app = express()
 
 const  { User } = require('./models/user')
+const { Property } = require('./models/property')
 const { auth } = require('./middleware/auth')
 
 require('dotenv').config();
@@ -48,7 +49,10 @@ app.post('/users/login', (req, res) => {
             user.generateToken((err, user)=> {
                 if(err) return res.status(400).send(err)
                 res.cookie('b_auth', user.token).status(200).json(
-                    {loginSuccess: true}
+                    {
+                        loginSuccess: true,
+                        token: user.token
+                    }
                 )
             })
         })
@@ -77,6 +81,26 @@ app.get('/user/logout', auth, (req, res) => {
             })
         }
     )
+})
+
+//Rutass propiedades
+
+app.post('/properties/register', (req, res) => {
+    const property = new Property(req.body)
+    property.save((err, doc) => {
+        if(err) return res.json({success: false, err})
+        res.status(200).json({
+            success: true,
+            propertydata: doc
+        })
+    })
+})
+
+app.get('/properties', auth, (req, res) => {
+    Property.find({}, (err, properties) => { 
+        if(err) return res.status(400).send(err)
+        res.status(200).send(properties)
+    })
 })
 
 
