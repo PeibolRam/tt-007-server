@@ -96,7 +96,7 @@ app.post('/properties/register', (req, res) => {
     })
 })
 
-app.get('/properties', auth, (req, res) => {
+app.get('/properties', (req, res) => {
     Property.find({}, (err, properties) => { 
         if(err) return res.status(400).send(err)
         res.status(200).send(properties)
