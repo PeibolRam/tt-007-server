@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser')
 const cors = require('cors')
 const app = express()
 
-const  { User } = require('./models/user')
+const { User } = require('./models/user')
 const { Property } = require('./models/property')
 const { auth } = require('./middleware/auth')
 
@@ -26,8 +26,9 @@ app.get('/', auth, (req, res) => {
     res.send('TT20-2-007');
 })
 
-
-//Rutas user
+/**
+ Rutas del User 
+*/
 app.post('/users/register', (req, res) => {
     const user = new User(req.body)
     user.save((err, doc) => {
@@ -83,8 +84,9 @@ app.get('/user/logout', auth, (req, res) => {
     )
 })
 
-//Rutass propiedades
-
+/**
+ Rutas de los Inmuebles
+*/
 app.post('/properties/register', (req, res) => {
     const property = new Property(req.body)
     property.save((err, doc) => {
@@ -99,6 +101,7 @@ app.post('/properties/register', (req, res) => {
 app.get('/properties', (req, res) => {
     Property.find({}, (err, properties) => { 
         if(err) return res.status(400).send(err)
+        console.log('****************')
         res.status(200).send(properties)
     })
 })
