@@ -99,13 +99,16 @@ app.post('/properties/register', (req, res) => {
 })
 
 app.get('/properties', (req, res) => {
-    console.log(res)
     Property.find({}, (err, properties) => { 
         if(err) return res.status(400).send(err)
         console.log('****************')
         res.status(200).send(properties)
     })
 })
+
+app.put('/properties/:id', function(res,req) {
+    console.log(req.params)        
+});
 
 
 app.listen(process.env.PORT, () => {
