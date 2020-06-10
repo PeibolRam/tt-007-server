@@ -103,8 +103,27 @@ app.get('/properties', (req, res) => {
     })
 })
 
-app.put('/properties/:id', function(res,req) {
-    console.log(req.params)        
+app.put('/properties/:id', function(req, res) {
+    if (!req.body) {
+        return res.status(400).send({
+            message: "Data to update can not be empty!"
+        });
+    }   
+    const id = req.params.id;
+    
+    Property.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    .then(data => {
+      if (!data) {
+        res.status(404).send({
+          message: `Cannot update Property with id=${id}. Maybe Property was not found!`
+        });
+      } else res.send({ message: "Property was updated successfully." });
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating Property with id=" + id
+      });
+    });
 });
 
 
