@@ -103,6 +103,10 @@ app.get('/properties', (req, res) => {
     })
 })
 
+app.put('/properties/:id', function(res,req) {
+    console.log(req.params)        
+});
+
 
 app.listen(process.env.PORT, () => {
   console.log(`Servidor corriendo en el puerto ${process.env.PORT}`)

@@ -21,9 +21,12 @@ const propertySchema = mongoose.Schema({
         type: Date
     },
     deedNumber: {
-        type: Number
+        type: String
     },
     notaria: {
+        type: String
+    },
+    walletNotario: {
         type: String
     },
     numSolicitud: {
@@ -36,7 +39,7 @@ const propertySchema = mongoose.Schema({
         type: String
     },
     numExterior: {
-        type: Number
+        type: String
     },
     numInterior: {
         type: Number
@@ -52,8 +55,14 @@ const propertySchema = mongoose.Schema({
     },
     codigoPosal: {
         type: Number,
-        min : 10000,
-        max : 99999
+        min : 0,
+        max : 1000000000000
+    },
+    hash: {
+        type: String
+    },
+    idBc: {
+        type: Number
     },
 })
 
