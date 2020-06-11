@@ -59,7 +59,7 @@ const propertySchema = mongoose.Schema({
         max : 1000000000000
     },
     hash: {
-        type: String
+        type: Array
     },
     idBc: {
         type: Number
