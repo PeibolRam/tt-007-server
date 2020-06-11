@@ -101,7 +101,6 @@ app.post('/properties/register', (req, res) => {
 app.get('/properties', (req, res) => {
     Property.find({}, (err, properties) => { 
         if(err) return res.status(400).send(err)
-        console.log('****************')
         res.status(200).send(properties)
     })
 })
@@ -129,7 +128,10 @@ app.put('/properties/:id', function(req, res) {
         res.status(404).send({
           message: `Cannot update Property with id=${id}. Maybe Property was not found!`
         });
-      } else res.send({ message: "Property was updated successfully." });
+      } else res.send({ 
+          success: true,
+          message: "Property was updated successfully." 
+        });
     })
     .catch(err => {
       res.status(500).send({
