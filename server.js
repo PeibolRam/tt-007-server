@@ -106,6 +106,15 @@ app.get('/properties', (req, res) => {
     })
 })
 
+app.get('/properties/:id', (req, res) => {
+    const id = req.params.id;
+    Property.findById({ '_id': id}).then(datitos => {
+        res.send(datitos)
+    })
+
+})
+
+
 app.put('/properties/:id', function(req, res) {
     if (!req.body) {
         return res.status(400).send({
