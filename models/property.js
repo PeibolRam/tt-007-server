@@ -30,7 +30,7 @@ const propertySchema = mongoose.Schema({
         type: String
     },
     numSolicitud: {
-        type: Number
+        type: String
     },
     ubicacion: {
         type: String
@@ -42,7 +42,7 @@ const propertySchema = mongoose.Schema({
         type: String
     },
     numInterior: {
-        type: Number
+        type: String
     },
     colonia: {
         type: String
@@ -54,9 +54,7 @@ const propertySchema = mongoose.Schema({
         type: String
     },
     codigoPosal: {
-        type: Number,
-        min : 0,
-        max : 1000000000000
+        type: String
     },
     hash: {
         type: Array
